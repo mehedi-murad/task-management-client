@@ -8,7 +8,7 @@ const Login = () => {
                 <div className='flex justify-center items-center'>
                     <img className='h-40' src={task} alt="" />
                 </div>
-                <h2 className='text-center text-white font-bold text-4xl'>Login</h2>
+                <h2 className='text-center text-white font-bold text-4xl'><Link to="/">Home</Link> / Login</h2>
                 <form className='space-y-5'>
                     <input type="email" name="email" placeholder="Your Email" className="input input-bordered input-warning  w-full" required />
                     <input type="password" name="password" placeholder="Password" className="input input-bordered input-warning  w-full" required />

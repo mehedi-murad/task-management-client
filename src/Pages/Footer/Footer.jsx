@@ -5,7 +5,7 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 const Footer = () => {
     return (
         <div className="bg-[#CDDAE0]">
-            <footer className="max-w-7xl mx-auto footer p-10  text-base-content flex justify-around items-center">
+            <div className="max-w-7xl mx-auto footer p-10  text-base-content flex justify-around items-center">
         <div>
         <nav>
             <div>
@@ -15,15 +15,13 @@ const Footer = () => {
         </nav> 
         </div>
         <div>
-        <nav>
-            <h2 className="footer-title text-center">Web Shortcut</h2> 
+            <h2 className="text-center">Web Shortcut</h2> 
             <div className="text-xl font-semibold space-x-8">
                 <NavLink to="/">Home</NavLink>
                 <NavLink to="/">Blog</NavLink>
                 <NavLink to="/">Contact</NavLink>
             </div>
-        </nav> 
-        <div className="flex space-x-4 text-2xl ml-14 mt-6">
+            <div className="flex space-x-4 text-2xl ml-14 mt-6">
                     <Link>
                         <FaGithub />
                     </Link>
@@ -47,7 +45,7 @@ const Footer = () => {
             </fieldset>
         </form>
         </div>
-</footer>
+</div>
         </div>
     );
 };

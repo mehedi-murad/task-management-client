@@ -69,7 +69,7 @@ const Register = () => {
                 <div className='flex justify-center items-center'>
                     <img className='h-40' src={task} alt="" />
                 </div>
-                <h2 className='text-center text-white font-bold text-4xl'><Link to='/'>Home</Link> | Signup</h2>
+                <h2 className='text-center text-white font-bold text-4xl'><Link to='/' className='underline'>Home</Link> | Signup</h2>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-control">
                         <label className="label">

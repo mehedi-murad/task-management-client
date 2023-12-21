@@ -8,7 +8,7 @@ const Login = () => {
     const { signInUser, googleSignIn } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from?.pathname || "/";
+    const from = location.state?.from?.pathname || "/dashboard";
 
     const handleLogin = e =>{
         e.preventDefault();
@@ -47,13 +47,14 @@ const Login = () => {
                 <div className='flex justify-center items-center'>
                     <img className='h-40' src={task} alt="" />
                 </div>
-                <h2 className='text-center text-white font-bold text-4xl'><Link to="/">Home</Link> / Login</h2>
+                <h2 className='text-center text-white font-bold text-4xl'><Link to="/" className='underline'>Home</Link> / Login</h2>
                 <form onSubmit={handleLogin} className='space-y-5'>
                     <input type="email" name="email" placeholder="Your Email" className="input input-bordered input-warning  w-full" required />
                     <input type="password" name="password" placeholder="Password" className="input input-bordered input-warning  w-full" required />
                     <input
                                 className="bg-[#F92659] px-4 py-2 text-white font-semibold rounded-lg mt-10 btn-block"
                                 type="submit"
+                                value="login"
                             />
                 </form>
                 <p className='text-white text-center'>New Here? Please 

@@ -14,7 +14,7 @@ const Section = () => {
             </div>
             <div data-aos="fade-left" className="flex-1 space-y-4 my-20">
                 <h2 className="text-4xl font-bold">What is Task Management?</h2>
-                <p className="text-gray-400 text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat debitis, minima dignissimos laborum officia asperiores, natus consequuntur placeat velit quaerat quae similique recusandae voluptates nulla! Autem vitae doloribus exercitationem pariatur, blanditiis accusamus ipsa aliquid? Velit, nulla? Vel quaerat, laboriosam cum totam enim deserunt aliquam libero iste culpa quo fuga sunt.</p>
+                <p className="text-gray-400 text-justify">Task management helps teams communicate the status of various tasks and duties for a project to make sure it is progressing smoothly and in a timely manner. Being able to see what other team members are working on and what tasks have been completed helps teams stay organized and keep the momentum high.</p>
                 <button className="btn btn-secondary mt-6">Know more</button>
             </div>
             

@@ -15,6 +15,7 @@ const Navbar = () => {
     <div className="text-xl font-semibold space-x-8">
       <NavLink to="/">Home</NavLink>
       <NavLink to="/addTask">Add Task</NavLink>
+      {user && <NavLink to="/dashboard">Dashboard</NavLink>}
       <NavLink to="/">Contact</NavLink>
       
     </div>

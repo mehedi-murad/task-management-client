@@ -1,4 +1,4 @@
-import { FaHome, FaTasks } from "react-icons/fa";
+import { FaClipboardList, FaEdit, FaHome, FaTasks } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
@@ -14,6 +14,16 @@ const Dashboard = () => {
             <li>
                 <NavLink to="/dashboard/createTask">
                     <FaTasks></FaTasks>Create Task
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to="/dashboard/toDo">
+                <FaClipboardList />To Do List
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to="/dashboard/updateToDo">
+                <FaEdit></FaEdit>Update toDo
                 </NavLink>
             </li>
             {/* <li>
@@ -51,6 +61,14 @@ const Dashboard = () => {
                 <FaNewspaper></FaNewspaper>NewsLetter
             </NavLink>
             </li> */}
+        </ul>
+        <div className="divider"></div>
+        <ul className="menu p-4 space-y-4">
+            <li>
+                <NavLink to="/">
+                    <FaHome></FaHome>Home
+                </NavLink>
+            </li>
         </ul>
       </div>
       <div className="flex-1 bg-base-200 taskBg">

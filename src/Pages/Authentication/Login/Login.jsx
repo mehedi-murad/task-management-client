@@ -1,7 +1,46 @@
 import './Login.css'
 import task from "../../../assets/banner/todo.png"
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../Provider/AuthProvider';
+import Swal from 'sweetalert2';
 const Login = () => {
+    const { signInUser, googleSignIn } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
+    const handleLogin = e =>{
+        e.preventDefault();
+
+        const form = e.target;
+
+        const email = form.email.value;
+        const password = form.password.value;
+        // console.log(email, password);
+
+        signInUser(email, password)
+        .then((result) => {
+            const user = result.user;
+            console.log(user);
+            navigate(location?.state ? location?.state : "/");
+            Swal.fire({
+            title: "Logged in!",
+            text: "Successfully logged in.",
+            imageUrl: 'https://i.ibb.co/VYGbm05/todo.png',
+                imageWidth: 300,
+                imageHeight: 300,
+            });
+            navigate(from, { replace: true });
+        })
+        .catch((error) => {
+            Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "You have put wrong credentials!",
+            });
+        });
+    }
     return (
         <div className="loginBanner h-[100vh] flex justify-center items-center">
             <div className='max-w-2xl mx-auto space-y-5 border rounded-lg p-10 glass'>
@@ -9,7 +48,7 @@ const Login = () => {
                     <img className='h-40' src={task} alt="" />
                 </div>
                 <h2 className='text-center text-white font-bold text-4xl'><Link to="/">Home</Link> / Login</h2>
-                <form className='space-y-5'>
+                <form onSubmit={handleLogin} className='space-y-5'>
                     <input type="email" name="email" placeholder="Your Email" className="input input-bordered input-warning  w-full" required />
                     <input type="password" name="password" placeholder="Password" className="input input-bordered input-warning  w-full" required />
                     <input

@@ -4,6 +4,7 @@ import Home from "../Home/Home";
 import AddTask from "../AddTask/AddTask";
 import Login from "../Authentication/Login/Login";
 import Register from "../Authentication/Register/Register";
+import PrivateRoute from "./PrivateRoute";
 
 const Routes = createBrowserRouter([
     {
@@ -16,7 +17,7 @@ const Routes = createBrowserRouter([
             },
             {
                 path:"/addTask",
-                element:<AddTask></AddTask>
+                element:<PrivateRoute><AddTask></AddTask></PrivateRoute>
             },
             {
                 path: "/login",

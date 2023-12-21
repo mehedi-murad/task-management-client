@@ -1,21 +1,22 @@
 import { Link, NavLink } from "react-router-dom";
 import { FaIndent } from "react-icons/fa";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.log(error));
+  };
   const menus = (
     <div className="text-xl font-semibold space-x-8">
       <NavLink to="/">Home</NavLink>
       <NavLink to="/addTask">Add Task</NavLink>
       <NavLink to="/">Contact</NavLink>
-      {/* <li>
-        <NavLink to="/">Home</NavLink>
-      </li>
-      <li>
-        <NavLink to="/test">All Test</NavLink>
-      </li>
-      <li>
-        <NavLink to="/contact">Contact</NavLink>
-      </li> */}
+      
     </div>
   );
   return (
@@ -57,22 +58,31 @@ const Navbar = () => {
       <div className="navbar-end">
         <div className="dropdown dropdown-bottom dropdown-end">
           <div tabIndex={0} role="button" className="btn m-1">
-                <FaIndent />
+                <FaIndent /> <h2>{user?.displayName}</h2>
           </div>
           
           <ul
             tabIndex={0}
-            className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+            className="dropdown-content z-[1] menu p-2 shadow bg-[#F92659] rounded-box w-52"
           >
             <div className="avatar flex justify-center p-6">
                 <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                    <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                    {user ? 
+                        <img src={user?.photoURL} />
+                        :
+                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />}
                 </div>
             </div>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
+            {user ? 
+              <li>
+                <p onClick={handleLogOut}>Logout</p>
+              </li>
+                :
+              <li className="text-white font-semibold">
+                <Link to="/login">Login</Link>
+              </li>
+              }
+            <li className="text-white font-semibold">
               <Link to="/register">Register</Link>
             </li>
           </ul>

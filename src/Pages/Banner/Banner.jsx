@@ -14,7 +14,7 @@ const Banner = () => {
     return (
         <div className="max-w-7xl mx-auto ">
             <img data-aos="fade-down" className="relative" src={bannerimg} alt="" />
-            <div className="absolute top-[25%] space-y-4 ml-20">
+            <div className="absolute top-[20%] space-y-4 ml-20">
                 {/* <h2 data-aos="fade-right" className="text-5xl font-bold">Manage Your Every <br /> Schedule</h2> */}
                 <div>
                 <TypeAnimation

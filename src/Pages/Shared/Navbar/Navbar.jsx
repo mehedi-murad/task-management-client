@@ -5,7 +5,7 @@ const Navbar = () => {
   const menus = (
     <div className="text-xl font-semibold space-x-8">
       <NavLink to="/">Home</NavLink>
-      <NavLink to="/">Blog</NavLink>
+      <NavLink to="/addTask">Add Task</NavLink>
       <NavLink to="/">Contact</NavLink>
       {/* <li>
         <NavLink to="/">Home</NavLink>

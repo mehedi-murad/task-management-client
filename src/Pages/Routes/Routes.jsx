@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "../Root/Root";
 import Home from "../Home/Home";
+import AddTask from "../AddTask/AddTask";
+import Login from "../Authentication/Login/Login";
 
 const Routes = createBrowserRouter([
     {
@@ -10,6 +12,14 @@ const Routes = createBrowserRouter([
             {
                 path: "/",
                 element:<Home></Home>
+            },
+            {
+                path:"/addTask",
+                element:<AddTask></AddTask>
+            },
+            {
+                path: "/login",
+                element: <Login></Login>
             }
         ]
     }

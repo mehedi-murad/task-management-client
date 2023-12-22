@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import Swal from 'sweetalert2';
 import { useContext } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
+import { FaGoogle } from 'react-icons/fa';
 
 
 const Register = () => {
@@ -21,6 +22,7 @@ const Register = () => {
         googleSignIn()
         .then(result => {
             console.log(result.user)
+            navigate('/')
         })
       }
 
@@ -162,11 +164,7 @@ const Register = () => {
               </div>
 
               <div className="form-control">
-                {/* <input
-                  className="btn bg-cyan-400 border-none"
-                  type="submit"
-                  value="Signup"
-                /> */}
+              
                 <input
                                 className="bg-[#F92659] px-4 py-2 text-white font-semibold rounded-lg mt-10 btn-block"
                                 type="submit" value="Signup"
@@ -179,6 +177,10 @@ const Register = () => {
                         <span className='text-bold text-xl ml-4 underline'>Login</span>
                     </Link>
                 </p>
+                <div className='divider divider-secondary text-white'>OR</div>
+                <div onClick={handleGoogleSignin} className='btn btn-outline text-white flex'>
+                  <FaGoogle></FaGoogle> <h2>SignUp by Google</h2>
+                </div>
             </div>
         </div>
     );

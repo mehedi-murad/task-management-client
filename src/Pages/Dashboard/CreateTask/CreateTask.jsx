@@ -7,6 +7,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 
 const CreateTask = () => {
     const [toDo, setToDO] = useState([])
+    
     useEffect(() => {
         fetch('http://localhost:5000/tasks')
         .then(res => res.json())
@@ -22,10 +23,7 @@ const CreateTask = () => {
         formState: { errors },
       } = useForm();
 
-      const dragStarted = (e,id) => {
-        
-      }
-
+      
       const onSubmit = (data) => {
         console.log(data)
         const taskInfo={
@@ -55,9 +53,9 @@ const CreateTask = () => {
                   timer: 1500,
                 });
               }
-        })
-
-      } 
+        }) 
+    }
+    
     return (
         <div className='text-center max-w-4xl mx-auto'>
             <h2 className='text-4xl text-white font-bold my-24'>Create Your Task</h2>
@@ -147,7 +145,9 @@ const CreateTask = () => {
                     <h2 className="text-white bg-[#F92659] px-4 py-2 font-semibold rounded-lg btn-block">ToDo Tasks</h2>
                     <div className="grid gap-4 p-2">
                     {
-                        toDo.map(task =><div key={task._id} draggable onDragStart={(e)=>dragStarted(e, task._id)} className="card bg-base-100 shadow-xl">
+                        toDo.map(task =>
+                        <div key={task._id} 
+                        className="card bg-base-100 shadow-xl">
                         <div className="card-body">
                         <h2 className="card-title font-bold">{task.title}</h2>
                         <div className='flex justify-center gap-4'>

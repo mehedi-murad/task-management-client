@@ -4,11 +4,37 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
+import { FaGoogle } from 'react-icons/fa';
 const Login = () => {
     const { signInUser, googleSignIn } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/dashboard";
+
+
+    const handleGoogleSignin = () =>{
+        googleSignIn()
+        .then(result => {
+            console.log(result.user)
+            const userInfo = {
+              name: result.user?.displayName,
+              email: result.user?.email
+            }
+            fetch('http://localhost:5000/users', {
+                method: 'POST',
+                headers: {
+                    'content-type':'application/json'
+                },
+                body: JSON.stringify(userInfo)
+            })
+            .then(res => res.json())
+            .then(data => {
+              console.log(data)
+              navigate('/')
+            })
+  
+        })
+    }
 
     const handleLogin = e =>{
         e.preventDefault();
@@ -62,6 +88,10 @@ const Login = () => {
                         <span className='text-bold text-xl ml-4 underline'>Register</span>
                     </Link>
                 </p>
+                <div className='divider divider-secondary text-white'>OR</div>
+                <div onClick={handleGoogleSignin} className='btn btn-outline text-white flex'>
+                  <FaGoogle></FaGoogle> <h2>Signin by Google</h2>
+                </div>
             </div>
         </div>
     );

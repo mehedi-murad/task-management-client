@@ -2,7 +2,7 @@ import { Parallax } from "react-parallax";
 import Banner from "../Banner/Banner";
 import Footer from "../Footer/Footer";
 import Navbar from "../Shared/Navbar/Navbar";
-import webBanner from "../../assets/banner/4.jpg"
+import webBanner from "../../assets/banner/mainBg.jpg"
 import Section from "../Section/Section";
 import SectionWho from "../SectionWho/SectionWho";
 

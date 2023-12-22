@@ -7,7 +7,6 @@ import { useQuery } from '@tanstack/react-query';
 
 const ToDo = () => {
     const axiosSecure = UseAxiosSecure()
-    // const [toDo, setToDO] = useState([])
 
     const { data: tasks = [], refetch } = useQuery({
         queryKey: ["tasks"],
@@ -17,13 +16,6 @@ const ToDo = () => {
         },
       });
 
-    // useEffect(() => {
-    //     fetch('http://localhost:5000/tasks')
-    //     .then(res => res.json())
-    //     .then(data => {
-    //         setToDO(data)
-    //     })
-    // },[])
 
     const handleDelete = id =>{
         Swal.fire({

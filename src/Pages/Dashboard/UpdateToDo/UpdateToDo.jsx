@@ -16,7 +16,7 @@ const UpdateToDo = () => {
             title, details, deadline, priority
         }
 
-        fetch(`http://localhost:5000/tasks/${_id}`, {
+        fetch(`https://task-management-server-lovat.vercel.app/tasks/${_id}`, {
             method: 'PUT',
             headers:{
                 'content-type':'application/json'

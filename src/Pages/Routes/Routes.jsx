@@ -53,7 +53,7 @@ const Routes = createBrowserRouter([
             {
                 path: "updateToDo/:id",
                 element:<UpdateToDo></UpdateToDo>,
-                loader: ({params}) => fetch(`http://localhost:5000/tasks/${params.id}`)
+                loader: ({params}) => fetch(`https://task-management-server-lovat.vercel.app/tasks/${params.id}`)
             }
         ]
     }

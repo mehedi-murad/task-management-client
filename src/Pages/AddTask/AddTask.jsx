@@ -1,9 +1,14 @@
+import CreateTask from "../Dashboard/CreateTask/CreateTask";
+import Navbar from "../Shared/Navbar/Navbar";
 
 
 const AddTask = () => {
     return (
-        <div>
-            Add your  task
+        <div className="bg-blue-950">
+            <div>
+                <Navbar></Navbar>
+                <CreateTask></CreateTask>
+            </div>
         </div>
     );
 };

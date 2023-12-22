@@ -9,8 +9,9 @@ const CreateTask = () => {
     const [toDo, setToDO] = useState([])
     const [ongoingTasks, setOngoingTasks] = useState([]);
     
+
     useEffect(() => {
-        fetch('http://localhost:5000/tasks')
+        fetch('https://task-management-server-lovat.vercel.app/tasks')
         .then(res => res.json())
         .then(data => {
             setToDO(data)
@@ -44,19 +45,21 @@ const CreateTask = () => {
       }
 
       const moveTaskToOngoing = taskId => {
-        // Remove the task with the given taskId from the ToDo section
-    const remainingTasks = toDo.filter((task) => task._id !== taskId);
-    setToDO(remainingTasks);
+            // Remove the task with the given taskId from the ToDo section
+        const remainingTasks = toDo.filter((task) => task._id !== taskId);
 
-    // Find the task with the transferred taskId in your original data
-    const movedTask = toDo.find((task) => task._id === taskId);
+        // Find the task with the transferred taskId in your original data
+        const movedTask = toDo.find((task) => task._id === taskId);
 
-    // Update the state for the "Ongoing" tasks
-    setOngoingTasks((prevOngoingTasks) => [...prevOngoingTasks, movedTask]);
+        // Update the state for the "Ongoing" tasks
+        setOngoingTasks((prevOngoingTasks) => [...prevOngoingTasks, movedTask]);
 
-    // Save updated tasks to localStorage
-    localStorage.setItem('toDo', JSON.stringify(remainingTasks));
-    localStorage.setItem('ongoingTasks', JSON.stringify([...ongoingTasks, movedTask]));
+        // Update the state for the "ToDo" tasks
+        setToDO(remainingTasks);
+
+        // Save updated tasks to localStorage
+        localStorage.setItem('toDo', JSON.stringify(remainingTasks));
+        localStorage.setItem('ongoingTasks', JSON.stringify([...ongoingTasks, movedTask]));
       }
 
     const {
@@ -78,7 +81,7 @@ const CreateTask = () => {
 
         }
 
-        fetch('http://localhost:5000/tasks',{
+        fetch('https://task-management-server-lovat.vercel.app/tasks',{
             method: 'POST',
             headers:{
                 'content-type':'application/json'
@@ -131,13 +134,7 @@ const CreateTask = () => {
                             name="details"
                             {...register("details", { required: true })}
                             ></textarea>
-                        {/* <input
-                        type="text"
-                        placeholder="Task Description"
-                        name="details"
-                        {...register("details", { required: true })}
-                        className="input input-bordered"
-                        /> */}
+                       
                         {errors.details && (
                         <span className="text-red-500 mt-2">
                             Task Details is required
@@ -190,13 +187,13 @@ const CreateTask = () => {
                     <div className="grid gap-4 p-2">
                     {
                         toDo.map(task =>
-                        <div key={task._id} draggable onDragStart={(e)=>dragStarted(e,task._id)}
+                        <div  draggable onDragStart={(e)=>dragStarted(e,task._id)}
                         className="card bg-base-100 shadow-xl">
                         <div className="card-body">
                         <h2 className="card-title font-bold">{task.title}</h2>
                         <div className='flex justify-center gap-4'>
-                                <Link to={`/dashboard/updateToDo/${task._id}`}><FaEdit></FaEdit></Link>
-                                <Link className='text-red-700'><FaTrash></FaTrash></Link>
+                                {/* <Link to={`/dashboard/updateToDo/${task._id}`}><FaEdit></FaEdit></Link> */}
+                                {/* <Link onClick={()=> handleDelete(task._id)} className='text-red-700'><FaTrash></FaTrash></Link> */}
                         </div>
                         </div>
                         
@@ -210,13 +207,13 @@ const CreateTask = () => {
                     <div className="grid gap-4 p-2">
                         {
                             ongoingTasks.map(task=>
-                            <div key={task._id}
+                            <div
                             className="card bg-base-100 shadow-xl">
                             <div className="card-body">
-                            <h2 className="card-title font-bold">{task.title}</h2>
+                            <h2 className="card-title font-bold">{task?.title}</h2>
                             <div className='flex justify-center gap-4'>
-                                    <Link to={`/dashboard/updateToDo/${task._id}`}><FaEdit></FaEdit></Link>
-                                    <Link className='text-red-700'><FaTrash></FaTrash></Link>
+                                    {/* <Link to={`/dashboard/updateToDo/${task._id}`}><FaEdit></FaEdit></Link> */}
+
                             </div>
                             </div>
                             

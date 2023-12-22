@@ -7,6 +7,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 
 const CreateTask = () => {
     const [toDo, setToDO] = useState([])
+    const [ongoingTasks, setOngoingTasks] = useState([]);
     
     useEffect(() => {
         fetch('http://localhost:5000/tasks')
@@ -16,6 +17,48 @@ const CreateTask = () => {
         })
     },[])
 
+    useEffect(() => {
+        // Load tasks from localStorage on component mount
+        const storedToDo = JSON.parse(localStorage.getItem('toDo')) || [];
+        const storedOngoingTasks = JSON.parse(localStorage.getItem('ongoingTasks')) || [];
+
+        setToDO(storedToDo);
+        setOngoingTasks(storedOngoingTasks);
+      }, []);
+
+    const dragStarted = (e,id) => {
+        e.dataTransfer.setData("todotask", id)
+      }
+
+      const dragOver = e =>{
+        e.preventDefault()
+        console.log('dragging over now')
+      }
+
+      const dropOn = e =>{
+        e.preventDefault();
+        const transferredTask = e.dataTransfer.getData('todotask')
+        console.log('transferredTask', transferredTask)
+        moveTaskToOngoing(transferredTask);
+        
+      }
+
+      const moveTaskToOngoing = taskId => {
+        // Remove the task with the given taskId from the ToDo section
+    const remainingTasks = toDo.filter((task) => task._id !== taskId);
+    setToDO(remainingTasks);
+
+    // Find the task with the transferred taskId in your original data
+    const movedTask = toDo.find((task) => task._id === taskId);
+
+    // Update the state for the "Ongoing" tasks
+    setOngoingTasks((prevOngoingTasks) => [...prevOngoingTasks, movedTask]);
+
+    // Save updated tasks to localStorage
+    localStorage.setItem('toDo', JSON.stringify(remainingTasks));
+    localStorage.setItem('ongoingTasks', JSON.stringify([...ongoingTasks, movedTask]));
+      }
+
     const {
         register,
         handleSubmit,
@@ -23,6 +66,7 @@ const CreateTask = () => {
         formState: { errors },
       } = useForm();
 
+      
       
       const onSubmit = (data) => {
         console.log(data)
@@ -146,7 +190,7 @@ const CreateTask = () => {
                     <div className="grid gap-4 p-2">
                     {
                         toDo.map(task =>
-                        <div key={task._id} 
+                        <div key={task._id} draggable onDragStart={(e)=>dragStarted(e,task._id)}
                         className="card bg-base-100 shadow-xl">
                         <div className="card-body">
                         <h2 className="card-title font-bold">{task.title}</h2>
@@ -161,8 +205,26 @@ const CreateTask = () => {
                     }
                     </div>
                 </div>
-                <div className="border rounded-lg">
+                <div droppable onDragOver={(e) => dragOver(e)} onDrop={(e)=>dropOn(e)} className="border rounded-lg">
                     <h2 className="text-white bg-[#F92659] px-4 py-2 font-semibold rounded-lg btn-block">Ongoing</h2>
+                    <div className="grid gap-4 p-2">
+                        {
+                            ongoingTasks.map(task=>
+                            <div key={task._id}
+                            className="card bg-base-100 shadow-xl">
+                            <div className="card-body">
+                            <h2 className="card-title font-bold">{task.title}</h2>
+                            <div className='flex justify-center gap-4'>
+                                    <Link to={`/dashboard/updateToDo/${task._id}`}><FaEdit></FaEdit></Link>
+                                    <Link className='text-red-700'><FaTrash></FaTrash></Link>
+                            </div>
+                            </div>
+                            
+                            
+                            </div>
+                                )
+                        }
+                    </div>
                 </div>
                 <div className="border rounded-lg">
                     <h2 className="text-white bg-[#F92659] px-4 py-2 font-semibold rounded-lg btn-block">Completed</h2>

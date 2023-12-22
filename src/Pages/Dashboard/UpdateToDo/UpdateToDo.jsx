@@ -1,4 +1,5 @@
 
+import { Helmet } from "react-helmet-async";
 import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 
@@ -41,6 +42,9 @@ const UpdateToDo = () => {
     }
     return (
         <div className='text-center max-w-4xl mx-auto'>
+            <Helmet>
+                <title>Update ToDo</title>
+            </Helmet>
             <h2 className='text-4xl text-white font-bold my-24'>Update TO-DO</h2>
             <div className="divider divider-secondary"></div>
             {/* <form onSubmit={handleSubmit(onSubmit)}>
@@ -118,7 +122,7 @@ const UpdateToDo = () => {
               </div>
               
             </form> */}
-            <form onSubmit={handleUpdateToDo}>
+            <form onSubmit={handleUpdateToDo} className="p-4">
                     <div className="form-control">
                         <label className="label">
                         <span className="label-text text-white">Task Title</span>

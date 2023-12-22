@@ -2,12 +2,12 @@ import { useForm } from "react-hook-form";
 import './CreateTask.css'
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 
 const CreateTask = () => {
     const [toDo, setToDO] = useState([])
     const [ongoingTasks, setOngoingTasks] = useState([]);
+    const [completedTasks, setCompletedTasks] = useState([]);
     
 
     useEffect(() => {
@@ -44,6 +44,13 @@ const CreateTask = () => {
         
       }
 
+      const dropOnCompleted = (e) => {
+        e.preventDefault();
+        const transferredTask = e.dataTransfer.getData('todotask');
+        console.log('transferredTask', transferredTask);
+        moveTaskToCompleted(transferredTask);
+      };
+
       const moveTaskToOngoing = taskId => {
             // Remove the task with the given taskId from the ToDo section
         const remainingTasks = toDo.filter((task) => task._id !== taskId);
@@ -61,6 +68,18 @@ const CreateTask = () => {
         localStorage.setItem('toDo', JSON.stringify(remainingTasks));
         localStorage.setItem('ongoingTasks', JSON.stringify([...ongoingTasks, movedTask]));
       }
+
+      const moveTaskToCompleted = (taskId) => {
+        const remainingOngoingTasks = ongoingTasks.filter((task) => task._id !== taskId);
+        const movedTask = ongoingTasks.find((task) => task._id === taskId);
+      
+        setCompletedTasks((prevCompletedTasks) => [...prevCompletedTasks, movedTask]);
+        setOngoingTasks(remainingOngoingTasks);
+      
+        // Save updated tasks to localStorage
+        localStorage.setItem('ongoingTasks', JSON.stringify(remainingOngoingTasks));
+        localStorage.setItem('completedTasks', JSON.stringify([...completedTasks, movedTask]));
+      };
 
     const {
         register,
@@ -105,9 +124,12 @@ const CreateTask = () => {
     
     return (
         <div className='text-center max-w-4xl mx-auto'>
+            <Helmet>
+                <title>Create Task</title>
+            </Helmet>
             <h2 className='text-4xl text-white font-bold my-24'>Create Your Task</h2>
             <div className="divider divider-secondary"></div>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} className="p-4">
                     <div className="form-control">
                         <label className="label">
                         <span className="label-text text-white">Task Title</span>
@@ -223,8 +245,27 @@ const CreateTask = () => {
                         }
                     </div>
                 </div>
-                <div className="border rounded-lg">
+                <div onDragOver={(e) => dragOver(e)}
+                     onDrop={(e) => dropOnCompleted(e)} className="border rounded-lg">
                     <h2 className="text-white bg-[#F92659] px-4 py-2 font-semibold rounded-lg btn-block">Completed</h2>
+                    <div className="grid gap-4 p-2">
+                    {
+                            completedTasks.map(task=>
+                            <div
+                            className="card bg-base-100 shadow-xl">
+                            <div className="card-body">
+                            <h2 className="card-title font-bold">{task?.title}</h2>
+                            <div className='flex justify-center gap-4'>
+                                    {/* <Link to={`/dashboard/updateToDo/${task._id}`}><FaEdit></FaEdit></Link> */}
+
+                            </div>
+                            </div>
+                            
+                            
+                            </div>
+                                )
+                        }
+                    </div>
                 </div>
             </div>
         </div>

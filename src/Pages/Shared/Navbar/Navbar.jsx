@@ -12,13 +12,21 @@ const Navbar = () => {
       .catch((error) => console.log(error));
   };
   const menus = (
-    <div className="text-xl font-semibold space-x-8">
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/addTask">Add Task</NavLink>
-      {user && <NavLink to="/dashboard">Dashboard</NavLink>}
-      <NavLink to="/">Contact</NavLink>
-      
-    </div>
+
+      <>
+      <li>
+      <Link to="/">Home</Link>
+      </li>
+      <li>
+      <Link to="/addTask">Add Task</Link>
+      </li>
+      <li>
+      {user && <Link to="/dashboard">Dashboard</Link>}
+      </li>
+      <li>
+      <Link to="/contact">Contact</Link>
+      </li>
+      </>
   );
   return (
     <div className="navbar bg-base-100 bannerbg py-6 px-12">
@@ -49,7 +57,7 @@ const Navbar = () => {
         </div>
         <div>
           <Link to="/">
-            <h2 className="text-2xl font-bold">Task Management</h2>
+            <h2 className="text-2xl font-bold hidden lg:block">Task Management</h2>
           </Link>
         </div>
       </div>

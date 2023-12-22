@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import UseAxiosSecure from '../../Hooks/UseAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import { Helmet } from 'react-helmet-async';
 
 const ToDo = () => {
     const axiosSecure = UseAxiosSecure()
@@ -45,11 +46,14 @@ const ToDo = () => {
         }
     return (
         <div className='max-w-7xl mx-auto'>
+            <Helmet>
+                <title>ToDo List</title>
+            </Helmet>
             <h2 className='text-4xl text-white font-bold text-center mt-24'>ToDo List</h2>
             <div className='divider divider-secondary'></div>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 '>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-4'>
                 {
-                    tasks.map(task =><div key={task._id} className="card w-96 bg-base-100 shadow-xl">
+                    tasks.map(task =><div key={task._id} className="card md:w-96 bg-base-100 shadow-xl">
                         <div className="card-body">
                         <h2 className="card-title font-bold">{task.title}</h2>
                         <p>{task.details}</p>

@@ -1,10 +1,17 @@
 import { FaClipboardList, FaEdit, FaHome, FaTasks } from "react-icons/fa";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
+import WelcomeNote from "./WelcomeNote";
+import { Helmet } from "react-helmet-async";
 
 const Dashboard = () => {
+    const location = useLocation()
+    const noWelcomeNote =  location.pathname.includes('dashboard/userProfile') || location.pathname.includes('dashboard/createTask') || location.pathname.includes('dashboard/toDo') || location.pathname.includes('dashboard/updateToDo') 
   return (
-    <div className="flex">
-      <div className="bg-[#F92659] w-96 min-h-screen text-white p-10">
+    <div className="flex flex-col md:flex-row">
+        <Helmet>
+                <title>Task Management | Dashboard</title>
+            </Helmet>
+      <div className="bg-[#F92659] md:w-96 min-h-screen text-white p-10">
         <ul className="menu p-4 space-y-4">
             <li>
                 <NavLink to="/dashboard/userprofile">
@@ -72,6 +79,7 @@ const Dashboard = () => {
         </ul>
       </div>
       <div className="flex-1 bg-base-200 taskBg">
+        {noWelcomeNote || <WelcomeNote></WelcomeNote>}
         <Outlet></Outlet>
       </div>
     </div>

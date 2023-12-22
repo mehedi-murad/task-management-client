@@ -8,9 +8,9 @@ const Section = () => {
         Aos.init({duration:2000})
     },[])
     return (
-        <div className="flex justify-center items-start max-w-7xl mx-auto bg-base-200 p-14">
+        <div className="flex flex-col md:flex-row justify-center items-start max-w-7xl mx-auto bg-base-200 p-14">
             <div data-aos="fade-right" className="flex-1">
-                <img className="h-80 ml-20" src={image} alt="" />
+                <img className="h-80 md:ml-20" src={image} alt="" />
             </div>
             <div data-aos="fade-left" className="flex-1 space-y-4 my-20">
                 <h2 className="text-4xl font-bold">What is Task Management?</h2>

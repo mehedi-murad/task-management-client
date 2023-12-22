@@ -10,11 +10,14 @@ import UserProfile from "../Dashboard/UserProfile/UserProfile";
 import CreateTask from "../Dashboard/CreateTask/CreateTask";
 import ToDo from "../Dashboard/ToDo/ToDo";
 import UpdateToDo from "../Dashboard/UpdateToDo/UpdateToDo";
+import Error from "../Error/Error";
+import Contact from "../Contact/Contact";
 
 const Routes = createBrowserRouter([
     {
         path: "/",
         element: <Root></Root>,
+        errorElement:<Error></Error>,
         children: [
             {
                 path: "/",
@@ -31,6 +34,10 @@ const Routes = createBrowserRouter([
             {
                 path: "/register",
                 element:<Register></Register>
+            },
+            {
+                path: "/contact",
+                element: <Contact></Contact>
             }
         ]
     },

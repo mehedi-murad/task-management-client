@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { useContext } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { FaGoogle } from 'react-icons/fa';
+import { Helmet } from 'react-helmet-async';
 
 
 const Register = () => {
@@ -67,6 +68,9 @@ const Register = () => {
     
     return (
         <div className="registerBanner h-[100vh] flex justify-center items-center">
+          <Helmet>
+                <title>Task Management | Register</title>
+            </Helmet>
             <div className='max-w-4xl mx-auto space-y-5 border rounded-lg p-10 glass w-full'>
                 <div className='flex justify-center items-center'>
                     <img className='h-40' src={task} alt="" />

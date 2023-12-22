@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import bannerimg from "../../assets/banner/banner1.jpg"
+import './Banner.css'
 import Aos from "aos"
 import "aos/dist/aos.css"
 import { useContext, useEffect } from "react";
@@ -14,9 +14,9 @@ const Banner = () => {
         Aos.init({duration:2000})
     },[])
     return (
-        <div className="max-w-7xl mx-auto ">
-            <img data-aos="fade-down" className="relative" src={bannerimg} alt="" />
-            <div className="absolute top-[20%] space-y-4 ml-20">
+        <div className="max-w-7xl mx-auto md:h-[70vh] bannerimg">
+            {/* <img data-aos="fade-down" className="relative" src={bannerimg} alt="" /> */}
+            <div className="md:absolute p-4 top-[15%] space-y-4 md:ml-20">
                 {/* <h2 data-aos="fade-right" className="text-5xl font-bold">Manage Your Every <br /> Schedule</h2> */}
                 <div>
                 <TypeAnimation

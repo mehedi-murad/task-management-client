@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
 import { FaGoogle } from 'react-icons/fa';
+import { Helmet } from 'react-helmet-async';
 const Login = () => {
     const { signInUser, googleSignIn } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -69,6 +70,9 @@ const Login = () => {
     }
     return (
         <div className="loginBanner h-[100vh] flex justify-center items-center">
+            <Helmet>
+                <title>Task Management | Login</title>
+            </Helmet>
             <div className='max-w-2xl mx-auto space-y-5 border rounded-lg p-10 glass'>
                 <div className='flex justify-center items-center'>
                     <img className='h-40' src={task} alt="" />
